@@ -710,6 +710,3 @@ while True:
     else:
         print("Invalid Input, try again\n")
 
-
-if __name__ == '__MyCalc__':
-    MyCalc()
