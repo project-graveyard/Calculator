@@ -1,2 +1,3 @@
 # Calculator
-A simple calculator with many functions. 
+
+A simple calculator with many functions.
