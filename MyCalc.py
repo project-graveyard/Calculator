@@ -5,6 +5,7 @@ __copyright__ = 'Copyright (c) 2020'
 
 import decimal
 from math import sin, cos, tan, asin, acos, atan, radians, degrees
+import os
 
 # This creates an enclosure for the heading
 
@@ -207,6 +208,7 @@ while True:
     print("{0:<30}{1:<30}".format("5.Check if even", "6.Quadratic"))
     print("{0:<30}{1:<30}".format("7.Vectors",	"8.Check in prime"))
     print("{0:<30}{1:<30}".format("9.Trigonometry", "10.Factorial"))
+    print("Enter 'cls' to clear the screen")
     print("Enter 'quit' to exit \n")
     s = input("Enter an option number: ")
     if s == "1":
@@ -703,6 +705,8 @@ while True:
         def print_ext():
             print("{0:^30}".format(e))
         print_ext()
+    elif s == "cls":
+        os.system("clear")
     elif s == "quit":
         print("Thank you")
         break
