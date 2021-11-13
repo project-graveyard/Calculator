@@ -3,182 +3,136 @@
 __author__ = 'David Saah <dasorange.hope@gmail.com>'
 __copyright__ = 'Copyright (c) 2020'
 
-import decimal
-from math import sin, cos, tan, asin, acos, atan, radians, degrees
+from math import sin, cos, tan, asin, acos, atan, radians, degrees, atan2
 import os
 
-# This creates an enclosure for the heading
+
+def decor(x, y=None):
+    if y:
+        print("{0:^50}".format("-"*50))
+        print("{0:^50}".format(y + str(x)))
+        print("{0:^50}".format("-"*50))
+    else:
+        print("{0:^50}".format("-"*50))
+        print("{0:^50}".format('The answer is ' + str(x)))
+        print("{0:^50}".format("-"*50))
 
 
-def decor(func):
-    def wrap():
-        print("{0:^40}".format("="*20))
-        func()
-        print("{0:^40}".format("="*20))
-    return wrap
+def val_input():
+    try:
+        num = input("Enter a number: ")
+        num_ = float(num)
+    except:
+        print("Invalid input, try again!")
+        num = input("Enter a number: ")
+        num_ = float(num)
+    return num_
 
 
-@decor
-def print_text():
-    print("{0:^40}".format("Welcome to MyCalc"))
-
-
-print_text()
-
-# This creates an enclosure for the answers
-
-
-def recor(fun):
-    def rap():
-        print("{0:<40}".format("-"*30))
-        fun()
-        print("{0:<40}".format("-"*30))
-    return rap
-
-# This rounds off the results of multiplication and division to 2 decimal places
-
-
-def dec1(x):
-    return decimal.Decimal(x).quantize(decimal.Decimal("0.00"))
-
-# This rounds off the results of the trigonometry to 4 decimal places
-
-
-def dec2(x):
-    return decimal.Decimal(x).quantize(decimal.Decimal("0.0000"))
-
-# The function for addition
+def dec4(x):
+    return round(x, 4)
 
 
 def add():
     print("\ninput '=' when done")
-    s = 0
+    sum_ = 0
     while True:
         try:
-            a = input("Enter numbers to add: ")
-            if a == '=':
+            num = input("Enter numbers to add: ")
+            if num == '=':
                 break
-            s += float(a)
+            sum_ += float(num)
         except:
             print("Invalid input, try again!")
-            a = input("Enter numbers to add: ")
-            if a == '=':
+            num = input("Enter numbers to add: ")
+            if num == '=':
                 break
-            s += float(a)
-    e = str(s)
-    d = "The result is " + e
-
-    @recor
-    def print_ext():
-        print("{0:^30}".format(d))
-    print_ext()
-
-# The function for subtraction
+            sum_ += float(num)
+    return decor(sum_)
 
 
-def sub(x, y):
-    b = x - y
-    c = str(b)
-    d = "The result is " + c
-
-    @recor
-    def print_ext():
-        print("{0:^30}".format(d))
-    print_ext()
-
-# The function for multiplication
+def sub():
+    num1 = val_input()
+    num2 = val_input()
+    return decor(num1 - num2)
 
 
 def mul():
     print("\nEnter 1 to see product")
-    b = 1
+    mul_ = 1
     while True:
-        try:
-            e = input("Enter a number: ")
-            f = float(e)
-            if f == 1.0:
-                break
-            b *= f
-        except:
-            print("Invalid input, try again!")
-            e = input("Enter a number: ")
-            f = float(e)
-            if f == 1.0:
-                break
-            b *= f
-    c = str(b)
-    a = str(dec1(c))
-    d = "The result is " + a
-
-    @recor
-    def print_ext():
-        print("{0:^30}".format(d))
-    print_ext()
-
-# The function for division
-
-
-def div(x, y):
-    b = x / y
-    c = str(b)
-    a = str(dec1(c))
-    d = "The result is " + a
-
-    @recor
-    def print_ext():
-        print("{0:^30}".format(d))
-    print_ext()
-
-# The function for checking even numbers
-
-
-def even(x):
-    if x % 2 == 0.0:
-        @recor
-        def print_ext():
-            print("{0:^30}".format("The number is even"))
-        print_ext()
-    else:
-        @recor
-        def print_ext():
-            print("{0:^30}".format("The number is not even"))
-        print_ext()
-
-# Thw function for solving quadratic equation in the form, ax²+bx+c
-
-
-def quad(a, b, c):
-    for i in range(1):
-        s = (b**2) - (4*a*c)
-        if s < 0:
-            @recor
-            def print_ext():
-                print("{0:^30}".format("No Real root"))
-            print_ext()
+        num = val_input()
+        if num == 1.0:
             break
-        v1 = (-b) + (s**0.5)
-        v2 = (-b) - (s**0.5)
-        x1 = v1 / (2*a)
-        x2 = v2 / (2*a)
-        if x1 == x2:
-            a = str(x1)
-            b = "x is " + a
+        mul_ *= num
+    return decor(round(mul_, 2))
 
-            @recor
-            def print_ext():
-                print("{0:^30}".format(b))
-            print_ext()
-        else:
-            a = str(x1)
-            b = str(x2)
-            c = "x is " + a + " or " + b
 
-            @recor
-            def print_ext():
-                print("{0:^30}".format(c))
-            print_ext()
+def div():
+    try:
+        num = input("Enter the numerator: ")
+        num1 = float(num)
+    except:
+        print("Invalid input, try again!")
+        num = input("Enter the numerator: ")
+        num1 = float(num)
 
-# Function for adding vectors
+    try:
+        num = input("Enter the denominator: ")
+        num2 = float(num)
+    except:
+        print("Invalid input, try again!")
+        num = input("Enter the denominator: ")
+        num2 = float(num)
+
+    return decor(dec4(num1 / num2))
+
+
+def even():
+    num = val_input()
+    if num % 2 == 0:
+        return decor("even")
+    else:
+        return decor("not even")
+
+
+def quad():
+    print("Enter in the form: ax²+bx+c")
+    try:
+        a1 = input("a? :")
+        a = float(a1)
+    except:
+        print("Invalid input, try again!")
+        a1 = input("a? :")
+        a = float(a1)
+
+    try:
+        b1 = input("b? :")
+        b = float(b1)
+    except:
+        print("Invalid input, try again!")
+        b1 = input("b? :")
+        b = float(b1)
+
+    try:
+        c1 = input("c? :")
+        c = float(c1)
+    except:
+        print("Invalid input, try again!")
+        c1 = input("c? :")
+        c = float(c1)
+
+    det_ = (b**2) - (4*a*c)
+
+    if det_ < 0:
+        return decor("no real root")
+    elif det_ == 0:
+        root = (-b + (det_**0.5)) / (2*a)
+        return decor(dec4(root), "The root of the equation is ")
+    else:
+        root1 = (-b + (det_**0.5)) / (2*a)
+        root2 = (-b - (det_**0.5)) / (2*a)
+        return decor(f'{dec4(root1)} and {dec4(root2)}', "The roots of the equation are ")
 
 
 class Add2D:
@@ -189,528 +143,315 @@ class Add2D:
     def __add__(self, other):
         return Add2D(self.x + other.x, self.y + other.y)
 
-# Function for subtracting vectors
-
 
 class Sub2D:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def __add__(self, other):
+    def __sub__(self, other):
         return Sub2D(self.x - other.x, self.y - other.y)
 
 
-# Main code
+def vector_input():
+    print("Enter vector as (x,y)")
+    try:
+        x1 = input("x? :")
+        x = float(x1)
+    except:
+        print("Invalid input, try again!")
+        x1 = input("x? :")
+        x = float(x1)
+
+    try:
+        y1 = input("y? :")
+        y = float(y1)
+    except:
+        print("Invalid input, try again!")
+        y1 = input("y? :")
+        y = float(y1)
+
+    return x, y
+
+
+def vector_menu():
+    print('\n')
+    print("{0:^40}".format("="*40))
+    print("{0:^40}".format("Welcome to 2D-Vectors Calculator"))
+    print("{0:^40}".format("="*40))
+
+    print("{0:<35}{1:<35}".format("1. Add", "2. Subtract"))
+    print("{0:<35}{1:<35}".format(
+        "3. Multiply by scale factor", "4. Dot product"))
+    print("{0:<35}{1:<35}".format(
+        "5. Magnitude (1 vector)", "6. Magnitude (2 Vectors)"))
+    print("{0:<35}{1:<35}".format(
+        "7. Angle between vector & origin", "8. Angle between vectors"))
+    print("To goto main menu, press 'ENTER'\n")
+    num = str(input("Choose an option: "))
+
+    if num == "1":
+        print("First vector")
+        vect1 = vector_input()
+        print("Second vector")
+        vect2 = vector_input()
+
+        first = Add2D(vect1[0], vect1[1])
+        second = Add2D(vect2[0], vect2[1])
+        result = first + second
+        return decor(f'({result.x}, {result.y})', "The sum of the vectors is ")
+
+    elif num == "2":
+        print("First vector")
+        vect1 = vector_input()
+        print("Second vector")
+        vect2 = vector_input()
+
+        first = Sub2D(vect1[0], vect1[1])
+        second = Sub2D(vect2[0], vect2[1])
+        result = first - second
+        return decor(f'({result.x}, {result.y})', "The difference of the vectors is ")
+
+    elif num == "3":
+        try:
+            num_ = input("Enter the factor: ")
+            factor = float(num_)
+        except:
+            print("Invalid input, try again!")
+            num_ = input("Enter the factor: ")
+            factor = float(num_)
+
+        vect = vector_input()
+        result = factor * vect[0], factor * vect[1]
+        return decor(f'({result[0]}, {result[1]})', "The resultant is ")
+
+    elif num == "4":
+        vect1 = vector_input()
+        vect2 = vector_input()
+
+        first = vect1[0] * vect2[0]
+        second = vect1[1] * vect2[1]
+        result = first + second
+        return decor(result, "The dot product is ")
+
+    elif num == "5":
+        vect = vector_input()
+        result = ((vect[0]**2) + (vect[1]**2))**0.5
+        return decor(dec4(result), "The magnitude is ")
+
+    elif num == "6":
+        vect1 = vector_input()
+        vect2 = vector_input()
+
+        x_ = (vect1[0] - vect2[0])**2
+        y_ = (vect1[1] - vect2[1])**2
+        result = (x_ + y_)**0.5
+        return decor(dec4(result), "The magnitude is ")
+
+    elif num == "7":
+        vect = vector_input()
+        result = degrees(atan2(vect[1], vect[0]))
+        return decor(dec4(result), "The angle is ")
+
+    elif num == "8":
+        vect1 = vector_input()
+        vect2 = vector_input()
+        mag1 = ((vect1[0]**2) + (vect1[1]**2))**0.5
+        mag2 = ((vect2[0]**2) + (vect2[1]**2))**0.5
+        dot_p = ((vect1[0] * vect2[0]) + (vect1[1] * vect2[1]))
+        result = degrees(acos(dot_p / (mag1 * mag2)))
+        return decor(dec4(result), "The angle is ")
+    else:
+        print("Invalid input, try again\n")
+
+
+def check_if_prime():
+    try:
+        num_ = input("Enter a number: ")
+        num = int(num_)
+    except:
+        print("Invalid input, try again!")
+        num_ = input("Enter a number: ")
+        num = int(num_)
+
+    counter = 0
+    for x in range(1, num):
+        if num % x == 0:
+            counter += 1
+    if counter == 1:
+        return decor("prime", "The number is ")
+    else:
+        return decor("not prime", "The number is ")
+
+
+def trig_input():
+    try:
+        num_ = input("Enter a number: ")
+        num = float(num_)
+    except:
+        print("Invalid input, try again!")
+        num_ = input("Enter a number: ")
+        num = float(num_)
+
+    return num
+
+
+def trig_menu():
+    print("{0:<30}{1:<30}".format("1.Degrees", "2.Radians"))
+    option_1 = input("Choose your numerical mode: ")
+    if option_1 == "1":
+        print('\nDegrees')
+        print("{0:<30}{1:<30}".format("1.Sin", "4.Sin inverse"))
+        print("{0:<30}{1:<30}".format("2.Cos", "5.Cos inverse"))
+        print("{0:<30}{1:<30}".format("3.Tan", "6.Tan inverse"))
+        print("To goto main menu, enter: 'home'\n")
+        option_2 = input("Select an option: ")
+        if option_2 == "1":
+            val = trig_input()
+            result = sin(radians(val))
+            return decor(dec4(result))
+
+        elif option_2 == "2":
+            val = trig_input()
+            result = cos(radians(val))
+            return decor(dec4(result))
+
+        elif option_2 == "3":
+            val = trig_input()
+            result = tan(radians(val))
+            return decor(dec4(result))
+
+        elif option_2 == "4":
+            val = trig_input()
+            result = degrees(asin(val))
+            return decor(dec4(result))
+
+        elif option_2 == "5":
+            val = trig_input()
+            result = degrees(acos(val))
+            return decor(dec4(result))
+
+        elif option_2 == "6":
+            val = trig_input()
+            result = degrees(atan(val))
+            return decor(dec4(result))
+
+    elif option_1 == "2":
+        print('\nRadians')
+        print("{0:<30}{1:<30}".format("1.Sin", "4.Sin inverse"))
+        print("{0:<30}{1:<30}".format("2.Cos", "5.Cos inverse"))
+        print("{0:<30}{1:<30}".format("3.Tan", "6.Tan inverse"))
+        print("To goto main menu, enter: 'home'\n")
+        option_2 = input("Select an option: ")
+        if option_2 == "1":
+            val = trig_input()
+            result = sin(val)
+            return decor(dec4(result))
+
+        elif option_2 == "2":
+            val = trig_input()
+            result = cos(val)
+            return decor(dec4(result))
+        
+        elif option_2 == "3":
+            val = trig_input()
+            result = tan(val)
+            return decor(dec4(result))
+        
+        elif option_2 == "4":
+            val = trig_input()
+            result = asin(val)
+            return decor(dec4(result))
+
+        elif option_2 == "5":
+            val = trig_input()
+            result = acos(val)
+            return decor(dec4(result))
+        
+        elif option_2 == "6":
+            val = trig_input()
+            result = atan(val)
+            return decor(dec4(result))
+    else:
+        print("Invalid input, try again\n")
+
+
+def factorial():
+    print("\nEnter a number to see its factorial")
+    num_ = 1
+    while True:
+        try:
+            val = input("Enter a number:  ")
+            num = int(val)
+        except:
+            print("Invalid input, try again!")
+            val = input("Enter a number:  ")
+            num = int(val)
+
+        if num < 0:
+            print("There is no factorial for negative numbers")
+            continue
+        else:
+            break
+
+    for x in range(1, num+1):
+        if num == 1 | num == 0:
+            return "The factorial is 1"
+        else:
+            num_ *= x
+    
+    return decor(num_, "The factorial is ")
+
+
+
+print("{0:^40}".format("="*20))
+print("{0:^40}".format("Welcome to MyCalc"))
+print("{0:^40}".format("="*20))
 while True:
-    print("{0:<30}{1:<30}".format("1.Add", "2.Subtract"))
-    print("{0:<30}{1:<30}".format("3.Multiply", "4.Divide"))
-    print("{0:<30}{1:<30}".format("5.Check if even", "6.Quadratic"))
-    print("{0:<30}{1:<30}".format("7.Vectors",	"8.Check in prime"))
-    print("{0:<30}{1:<30}".format("9.Trigonometry", "10.Factorial"))
+    print("{0:<30}{1:<30}".format("1. Add", "2. Subtract"))
+    print("{0:<30}{1:<30}".format("3. Multiply", "4. Divide"))
+    print("{0:<30}{1:<30}".format("5. Check if even", "6. Quadratic"))
+    print("{0:<30}{1:<30}".format("7. Vectors",	"8. Check in prime"))
+    print("{0:<30}{1:<30}".format("9. Trigonometry", "10. Factorial"))
     print("Enter 'cls' to clear the screen")
     print("Enter 'quit' to exit \n")
-    s = input("Enter an option number: ")
-    if s == "1":
+    option = input("Enter an option number: ")
+    if option == "1":
         add()
-    elif s == "2":
-        try:
-            a = input("Enter a number: ")
-            x = float(a)
-        except:
-            print("Invalid input, try again!")
-            a = input("Enter a number: ")
-            x = float(a)
-        try:
-            b = input("Enter another number: ")
-            y = float(b)
-        except:
-            print("Invalid input, try again!")
-            b = input("Enter another number: ")
-            y = float(b)
-        sub(x, y)
-    elif s == "3":
+
+    elif option == "2":
+        sub()
+
+    elif option == "3":
         mul()
-    elif s == "4":
-        try:
-            a = input("Enter the numerator: ")
-            x = float(a)
-        except:
-            print("Invalid input, try again!")
-            a = input("Enter the numerator: ")
-            x = float(a)
 
-        try:
-            b = input("Enter the denominator: ")
-            y = float(b)
-        except:
-            print("Invalid input, try again!")
-            b = input("Enter the denominator: ")
-            y = float(b)
+    elif option == "4":
+        div()
 
-        div(x, y)
-    elif s == "5":
-        try:
-            a = input("Enter a number: ")
-            x = int(a)
-        except:
-            print("Invalid input, try again!")
-            a = input("Enter a number: ")
-            x = int(a)
+    elif option == "5":
+        even()
 
-        even(x)
-    elif s == "6":
-        print("Enter in the form: ax²+bx+c")
-        try:
-            a1 = input("a? :")
-            a = float(a1)
-        except:
-            print("Invalid input, try again!")
-            a1 = input("a? :")
-            a = float(a1)
+    elif option == "6":
+        quad()
 
-        try:
-            b1 = input("b? :")
-            b = float(b1)
-        except:
-            print("Invalid input, try again!")
-            b1 = input("b? :")
-            b = float(b1)
+    elif option == "7":
+        vector_menu()
 
-        try:
-            c1 = input("c? :")
-            c = float(c1)
-        except:
-            print("Invalid input, try again!")
-            c1 = input("c? :")
-            c = float(c1)
+    elif option == "8":
+        check_if_prime()
 
-        quad(a, b, c)
-    elif s == "7":
-        @recor
-        def print_ext():
-            print("{0:^30}".format("Welcome to 2D-Vectors Calculator"))
-        print_ext()
-        print("{0:<30}{1:<30}".format("1.Add", "2.Subtract"))
-        print("{0:<30}{1:<30}".format(
-            "3.Multiply by scale factor", "4.Dot product"))
-        print("To goto main menu, enter: 'home'\n")
-        num = str(input("Choose an option: "))
+    elif option == "9":
+        trig_menu()
 
-        if num == "1":
-            print("Enter vectors as (x,y)")
-            print("First vector")
-            try:
-                a3, a4 = input("x: "), input("y: ")
-                a1, a2 = float(a3), float(a4)
-            except:
-                print("Invalid input, try again!")
-                a3, a4 = input("x: "), input("y: ")
-                a1, a2 = float(a3), float(a4)
+    elif option == "10":
+        factorial()
 
-            print("Second vector")
-            try:
-                b3, b4 = input("x: "), input("y: ")
-                b1, b2 = float(b3), float(b4)
-            except:
-                print("Invalid input, try again!")
-                b3, b4 = input("x: "), input("y: ")
-                b1, b2 = float(b3), float(b4)
-
-            first = Add2D(a1, a2)
-            second = Add2D(b1, b2)
-            result = first + second
-            a = (result.x, result.y)
-            b = str(a)
-            c = "The resultant is " + b
-
-            @recor
-            def print_ext():
-                print("{0:^30}".format(c))
-            print_ext()
-
-        elif num == "2":
-            print("Enter vectors as (x,y)")
-            print("First vector")
-            try:
-                a3, a4 = input("x: "), input("y: ")
-                a1, a2 = float(a3), float(a4)
-            except:
-                print("Invalid input, try again!")
-                a3, a4 = input("x: "), input("y: ")
-                a1, a2 = float(a3), float(a4)
-
-            print("Second vector")
-            try:
-                b3, b4 = input("x: "), input("y: ")
-                b1, b2 = float(b3), float(b4)
-            except:
-                print("Invalid input, try again!")
-                b3, b4 = input("x: "), input("y: ")
-                b1, b2 = float(b3), float(b4)
-
-            first = Sub2D(a1, a2)
-            second = Sub2D(b1, b2)
-            result = first + second
-            b = (result.x, result.y)
-            d = str(b)
-            c = "The resultant is " + d
-
-            @recor
-            def print_ext():
-                print("{0:^30}".format(c))
-            print_ext()
-
-        elif num == "3":
-            try:
-                a1 = input("Enter the factor: ")
-                a = float(a1)
-            except:
-                print("Invalid input, try again!")
-                a1 = input("Enter the factor: ")
-                a = float(a1)
-
-            print("Enter vectors as (x,y)")
-            try:
-                b1, c1 = input("x: "), input("y: ")
-                b, c = float(b1), float(c1)
-            except:
-                print("Invalid input, try again!")
-                b1, c1 = input("x: "), input("y: ")
-                b, c = float(b1), float(c1)
-
-            d = (a*b, a*c)
-            e = str(d)
-            f = "The resultant is " + e
-
-            @recor
-            def print_ext():
-                print("{0:^30}".format(f))
-            print_ext()
-
-        elif num == "4":
-            print("Enter vectors as (x,y)")
-            print("First vector")
-            try:
-                a3, a4 = input("x: "), input("y: ")
-                a1, a2 = float(a3), float(a4)
-            except:
-                print("Invalid input, try again!")
-                a3, a4 = input("x: "), input("y: ")
-                a1, a2 = float(a3), float(a4)
-
-            print("Second vector")
-            try:
-                b3, b4 = input("x: "), input("y: ")
-                b1, b2 = float(b3), float(b4)
-            except:
-                print("Invalid input, try again!")
-                b3, b4 = input("x: "), input("y: ")
-                b1, b2 = float(b3), float(b4)
-
-            c1 = a1*b1
-            c2 = a2*b2
-            d = c1+c2
-            b = str(d)
-            c = "The resultant is " + b
-
-            @recor
-            def print_ext():
-                print("{0:^30}".format(c))
-            print_ext()
-        elif num == "home":
-            print("\n")
-
-    elif s == "8":
-        try:
-            a1 = input("Enter a number: ")
-            a = int(a1)
-        except:
-            print("Invalid input, try again!")
-            a1 = input("Enter a number: ")
-            a = int(a1)
-
-        c = 0
-        for x in range(1, a):
-            if a % x == 0:
-                c += 1
-        if c == 1:
-            @recor
-            def print_ext():
-                print("{0:^30}".format("The number is prime"))
-            print_ext()
-        else:
-            @recor
-            def print_ext():
-                print("{0:^30}".format("The number is not prime"))
-            print_ext()
-
-    elif s == "9":
-        print("{0:<30}{1:<30}".format("1.Degrees", "2.Radians"))
-        a = input("Choose your numerical mode: ")
-        if a == "1":
-            print("{0:<30}{1:<30}".format("1.Sin", "4.Sin inverse"))
-            print("{0:<30}{1:<30}".format("2.Cos", "5.Cos inverse"))
-            print("{0:<30}{1:<30}".format("3.Tan", "6.Tan inverse"))
-            print("To goto main menu, enter: 'home'\n")
-            b = input("Select an option: ")
-            if b == "1":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = sin(radians(c))
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "2":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = cos(radians(c))
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "3":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = tan(radians(c))
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "4":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = degrees(asin(c))
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "5":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = degrees(acos(c))
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "6":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = degrees(atan(c))
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "home":
-                print("\n")
-        elif a == "2":
-            print("{0:<30}{1:<30}".format("1.Sin", "4.Sin inverse"))
-            print("{0:<30}{1:<30}".format("2.Cos", "5.Cos inverse"))
-            print("{0:<30}{1:<30}".format("3.Tan", "6.Tan inverse"))
-            print("To goto main menu, enter: 'home'\n")
-            b = input("Select an option: ")
-            if b == "1":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = sin(c)
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "2":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = cos(c)
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "3":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = tan(c)
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "4":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = asin(c)
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "5":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = acos(c)
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "6":
-                try:
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-                except:
-                    print("Invalid input, try again!")
-                    c1 = input("Enter a number: ")
-                    c = float(c1)
-
-                d = atan(c)
-                e = str(dec2(d))
-                f = "The answer is " + e
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(f))
-                print_ext()
-            elif b == "home":
-                print("\n")
-                continue
-        else:
-            print("Invalid input, try again\n")
-    elif s == "10":
-        print("\nEnter a number to see its factorial")
-        sw = 1
-        while True:
-            try:
-                a1 = input("Enter a number:  ")
-                a = int(a1)
-            except:
-                print("Invalid input, try again!")
-                a1 = input("Enter a number:  ")
-                a = int(a1)
-
-            if a < 0:
-                print("There is no factorial for negative numbers")
-                continue
-            else:
-                break
-
-        for x in range(1, a+1):
-            if a == 1 | a == 0:
-                er = "The answer is 1"
-
-                @recor
-                def print_ext():
-                    print("{0:^30}".format(er))
-                print_ext()
-            sw = x * sw
-        d = str(sw)
-        e = "The answer is " + d
-
-        @recor
-        def print_ext():
-            print("{0:^30}".format(e))
-        print_ext()
-    elif s == "cls":
+    elif option == "cls":
         os.system("clear")
-    elif s == "quit":
+
+    elif option == "quit":
         print("Thank you")
         break
 
     else:
         print("Invalid Input, try again\n")
-
