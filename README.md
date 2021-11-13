@@ -15,6 +15,10 @@ A simple calculator with many functions.
     * Subtraction
     * Multiply by a scale factor
     * Find the dot product
+    * Calculating magnitude (1 vector)
+    * Calculating magnitude (2 vectors)
+    * Finding angle between vector & origin
+    * Finding angle between vectors
 * Trigonometry   (In degrees and radians)
     * sin, cos, tan 
     * sin inverse, cos inverse, tan inverse
