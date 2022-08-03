@@ -396,7 +396,7 @@ def factorial():
 
     for x in range(1, num+1):
         if num == 1 | num == 0:
-            return "The factorial is 1"
+            break
         else:
             num_ *= x
     
