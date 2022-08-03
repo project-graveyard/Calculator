@@ -274,14 +274,12 @@ def check_if_prime():
         num_ = input("Enter a number: ")
         num = int(num_)
 
-    counter = 0
-    for x in range(1, num):
-        if num % x == 0:
-            counter += 1
-    if counter == 1:
-        return decor("prime", "The number is ")
-    else:
+    if num <= 1:
         return decor("not prime", "The number is ")
+    for i in range(2, int(num**0.5)+1):
+        if num % i == 0:
+            return decor("not prime", "The number is ")
+    return decor("prime", "The number is ")
 
 
 def trig_input():
@@ -352,12 +350,12 @@ def trig_menu():
             val = trig_input()
             result = cos(val)
             return decor(dec4(result))
-        
+
         elif option_2 == "3":
             val = trig_input()
             result = tan(val)
             return decor(dec4(result))
-        
+
         elif option_2 == "4":
             val = trig_input()
             result = asin(val)
@@ -367,7 +365,7 @@ def trig_menu():
             val = trig_input()
             result = acos(val)
             return decor(dec4(result))
-        
+
         elif option_2 == "6":
             val = trig_input()
             result = atan(val)
@@ -399,9 +397,8 @@ def factorial():
             break
         else:
             num_ *= x
-    
-    return decor(num_, "The factorial is ")
 
+    return decor(num_, "The factorial is ")
 
 
 print("{0:^40}".format("="*20))
