@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """A customized calculator with cool functions"""
 
 __author__ = 'David Saah <dasorange.hope@gmail.com>'
