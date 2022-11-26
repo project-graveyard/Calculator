@@ -10,6 +10,12 @@ import os
 
 
 def decor(x, y=None):
+    """Decorates the output of functions
+
+    Args:
+        x (any): _description_
+        y (str, optional): _description_. Defaults to None.
+    """
     if y:
         print("{0:^50}".format("-"*50))
         print("{0:^50}".format(y + str(x)))
@@ -93,9 +99,9 @@ def div():
 def even():
     num = val_input()
     if num % 2 == 0:
-        return decor("even")
+        return decor("even", "The number is ")
     else:
-        return decor("not even")
+        return decor("not even", "The number is ")
 
 
 def quad():
