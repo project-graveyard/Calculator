@@ -12,27 +12,11 @@ def get_float_input():
     return num_
 
 
-# def decor(x, y=None):
-#     """Decorates the output of functions
+def output(data):
+    print("{0:^50}".format("-"*50))
+    print("{0:^50}".format(data))
+    print("{0:^50}".format("-"*50))
 
-#     Args:
-#         x (any): _description_
-#         y (str, optional): _description_. Defaults to None.
-#     """
-#     if y:
-#         print("{0:^50}".format("-"*50))
-#         print("{0:^50}".format(y + str(x)))
-#         print("{0:^50}".format("-"*50))
-#     else:
-#         print("{0:^50}".format("-"*50))
-#         print("{0:^50}".format('The answer is ' + str(x)))
-#         print("{0:^50}".format("-"*50))
-
-
-
-
-# def dec4(x):
-#     return round(x, 4)
 
 # def trig_input():
 #     try:
