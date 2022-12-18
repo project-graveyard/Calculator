@@ -5,6 +5,7 @@ __author__ = 'David Saah <dasorange.hope@gmail.com>'
 __copyright__ = 'Copyright (c) 2020'
 
 from functions import Arithmetic
+from helper import output
 # from functions import Vectors
 import os
 
@@ -26,17 +27,20 @@ while True:
     option = input("Enter an option number: ")
     
     if option == "1":
-        print("\ninput 0 when done")
+        print()
+        print("input 0 when done")
         value = arithmetic.add()
-        print(f"The sum of the numbers are {value}")   
+        output(f"The sum of the numbers are {value}")   
 
     elif option == "2":
+        print()
         value = arithmetic.sub()
-        print(f"The difference is {value}")
+        output(f"The difference is {value}")
 
-
-    # elif option == "3":
-    #     mul()
+    elif option == "3":
+        print()
+        print("Enter 1 to see product")
+        value = arithmetic.mul()
 
     # elif option == "4":
     #     div()
