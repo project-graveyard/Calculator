@@ -23,18 +23,16 @@ class Arithmetic:
         num2 = get_float_input()
         return num1 - num2
 
+    def mul():
+        mul_ = 1
+        while True:
+            num = get_float_input()
+            if num == 1.0:
+                break
+            mul_ *= num
+        return round(mul_, 2)
+
 """
-def mul():
-    print("\nEnter 1 to see product")
-    mul_ = 1
-    while True:
-        num = val_input()
-        if num == 1.0:
-            break
-        mul_ *= num
-    return decor(round(mul_, 2))
-
-
 def div():
     try:
         num = input("Enter the numerator: ")
