@@ -2,7 +2,8 @@ __doc__ = "Implementation of mathematical functions"
 
 
 from helper import get_float_input
-from math import sin, cos, tan, asin, acos, atan, radians, degrees, atan2
+from helper import get_int_input
+from math import sin, cos, tan, asin, acos, radians, degrees, atan2
 
 
 class Arithmetic:
@@ -17,13 +18,12 @@ class Arithmetic:
                 sum_ += float(num)
         return sum_
 
-
     def sub(self):
         num1 = get_float_input()
         num2 = get_float_input()
         return num1 - num2
 
-    def mul():
+    def mul(self):
         mul_ = 1
         while True:
             num = get_float_input()
@@ -32,132 +32,106 @@ class Arithmetic:
             mul_ *= num
         return round(mul_, 2)
 
-"""
-def div():
-    try:
-        num = input("Enter the numerator: ")
-        num1 = float(num)
-    except:
-        print("Invalid input, try again!")
-        num = input("Enter the numerator: ")
-        num1 = float(num)
-
-    try:
-        num = input("Enter the denominator: ")
-        num2 = float(num)
-    except:
-        print("Invalid input, try again!")
-        num = input("Enter the denominator: ")
-        num2 = float(num)
-
-    return decor(dec4(num1 / num2))
+    def div(self):
+        num1 = get_float_input(msg="Enter the numerator: ")
+        num2 = get_float_input(msg="Enter the divisor: ")
+        return round(num1 / num2, 4)
 
 
-def even():
-    num = val_input()
-    if num % 2 == 0:
-        return decor("even", "The number is ")
-    else:
-        return decor("not even", "The number is ")
+class Polynomial:
+
+    def get_quad_roots(self):
+        print("Enter in the form: ax²+bx+c")
+
+        a = get_float_input(msg="a? : ")
+        b = get_float_input(msg="b? : ")
+        c = get_float_input(msg="c? : ")
+
+        det_ = (b**2) - (4*a*c)
+
+        if det_ < 0:
+            return "No real root"
+        elif det_ == 0:
+            root = (-b + (det_**0.5)) / (2*a)
+            return f"The root of the equation is {root}"
+        else:
+            root1 = (-b + (det_**0.5)) / (2*a)
+            root2 = (-b - (det_**0.5)) / (2*a)
+            return f"The roots of the equation are {root1} and {root2}"
 
 
-def quad():
-    print("Enter in the form: ax²+bx+c")
-    try:
-        a1 = input("a? :")
-        a = float(a1)
-    except:
-        print("Invalid input, try again!")
-        a1 = input("a? :")
-        a = float(a1)
+class NumberProperties:
 
-    try:
-        b1 = input("b? :")
-        b = float(b1)
-    except:
-        print("Invalid input, try again!")
-        b1 = input("b? :")
-        b = float(b1)
+    def is_even(self):
+        num = get_int_input()
+        return num % 2 == 0
 
-    try:
-        c1 = input("c? :")
-        c = float(c1)
-    except:
-        print("Invalid input, try again!")
-        c1 = input("c? :")
-        c = float(c1)
+    def is_prime(self):
+        num = get_int_input()
 
-    det_ = (b**2) - (4*a*c)
+        if num <= 1:
+            return False
 
-    if det_ < 0:
-        return decor("no real root")
-    elif det_ == 0:
-        root = (-b + (det_**0.5)) / (2*a)
-        return decor(dec4(root), "The root of the equation is ")
-    else:
-        root1 = (-b + (det_**0.5)) / (2*a)
-        root2 = (-b - (det_**0.5)) / (2*a)
-        return decor(f'{dec4(root1)} and {dec4(root2)}', "The roots of the equation are ")
+        for i in range(2, int(num**0.5)+1):
+            if num % i == 0:
+                return False
 
+        return True
 
-class Add2D:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __add__(self, other):
-        return Add2D(self.x + other.x, self.y + other.y)
-
-
-class Sub2D:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __sub__(self, other):
-        return Sub2D(self.x - other.x, self.y - other.y)
-
-
-def check_if_prime():
-    try:
-        num_ = input("Enter a number: ")
-        num = int(num_)
-    except:
-        print("Invalid input, try again!")
-        num_ = input("Enter a number: ")
-        num = int(num_)
-
-    if num <= 1:
-        return decor("not prime", "The number is ")
-    for i in range(2, int(num**0.5)+1):
-        if num % i == 0:
-            return decor("not prime", "The number is ")
-    return decor("prime", "The number is ")
-
-
-def factorial():
-    print("\nEnter a number to see its factorial")
-    num_ = 1
-    while True:
-        try:
-            val = input("Enter a number:  ")
-            num = int(val)
-        except:
-            print("Invalid input, try again!")
-            val = input("Enter a number:  ")
-            num = int(val)
+    def factorial(self):
+        print("Enter a number to see its factorial")
+        value = 1
+        num = get_int_input()
 
         if num < 0:
-            print("There is no factorial for negative numbers")
-            continue
-        else:
-            break
+            return "There is no factorial for negative numbers"
 
-    for x in range(1, num+1):
-        if num == 1 | num == 0:
-            break
-        else:
-            num_ *= x
+        for x in range(1, num+1):
+            if num == 1 | num == 0:
+                break
+            else:
+                value *= x
 
-    return decor(num_, "The factorial is ")
-"""
+        return f"The factorial is {value}"
+
+
+class Trignometry:
+
+    def __init__(self, mode="radians") -> None:
+        self.mode = mode
+    
+    def find_sin(self):
+        num = get_float_input()
+        if self.mode == "degrees":
+            return round(sin(radians(num)), 4)
+        return round(sin(num), 4)
+    
+    def find_cos(self):
+        num = get_float_input()
+        if self.mode == "degrees":
+            return round(cos(radians(num)), 4)
+        return round(cos(num), 4)
+    
+    def find_tan(self):
+        num = get_float_input()
+        if self.mode == "degrees":
+            return round(tan(radians(num)), 4)
+        return round(tan(num), 4)
+    
+    def find_sin_inverse(self):
+        num = get_float_input()
+        if self.mode == "degrees":
+            return round(degrees(asin(num)), 4)
+        return round(asin(num), 4)
+    
+    def find_cos_inverse(self):
+        num = get_float_input()
+        if self.mode == "degrees":
+            return round(degrees(acos(num)), 4)
+        return round(acos(num), 4)
+    
+    def find_tan_inverse(self):
+        num = get_float_input()
+        if self.mode == "degrees":
+            return round(degrees(atan2(num)), 4)
+        return round(atan2(num), 4)
