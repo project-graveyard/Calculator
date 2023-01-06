@@ -5,30 +5,39 @@ __author__ = 'David Saah <dasorange.hope@gmail.com>'
 __copyright__ = 'Copyright (c) 2020'
 
 from functions import Arithmetic
+from functions import Polynomial
+from functions import NumberProperties
 from helper import output
-# from functions import Vectors
+from submenus import trig_menu
 import os
+from time import sleep
+
 
 arithmetic = Arithmetic()
+polynomial = Polynomial()
+num_property = NumberProperties()
 
 
-print("{0:^40}".format("="*20))
-print("{0:^40}".format("Welcome to MyCalc"))
-print("{0:^40}".format("="*20))
+print("="*50)
+print("{0:^50}".format("Welcome to MyCalc"))
+print("="*50)
 while True:
+    print("{0:^50}".format("Main Menu"))
+    print("-"*50)
     print("{0:<30}{1:<30}".format("1. Add", "2. Subtract"))
     print("{0:<30}{1:<30}".format("3. Multiply", "4. Divide"))
-    print("{0:<30}{1:<30}".format("5. Check if even", "6. Quadratic"))
-    print("{0:<30}{1:<30}".format("7. Vectors",	"8. Check in prime"))
-    print("{0:<30}{1:<30}".format("9. Trigonometry", "10. Factorial"))
-    print("Enter 'cls' to clear the screen")
-    print("Enter 'quit' to exit \n")
+    print("{0:<30}{1:<30}".format("5. Check if even", "6. Check if prime"))
+    print("{0:<30}{1:<30}".format("7. Quadratic equation",	"8. Factorial"))
+    print("{0:<30}{1:<30}".format("9. Trigonometry", "10. Vectors"))
+    print()
+    print("[!] Enter 'cls' to clear the screen")
+    print("[!} Enter 'quit' to exit \n")
 
     option = input("Enter an option number: ")
     
     if option == "1":
         print()
-        print("input 0 when done")
+        print("[!] Input 0 when done\n")
         value = arithmetic.add()
         output(f"The sum of the numbers are {value}")   
 
@@ -41,35 +50,52 @@ while True:
         print()
         print("Enter 1 to see product")
         value = arithmetic.mul()
+        output(f"The product is {value}")
 
-    # elif option == "4":
-    #     div()
+    elif option == "4":
+        print()
+        value = arithmetic.div()
+        output(f"The quotient is {value}")
 
-    # elif option == "5":
-    #     even()
+    elif option == "5":
+        print()
+        is_even = num_property.is_even()
+        if is_even:
+            output("The number is even")
+        else:
+            output("The number is odd")
 
-    # elif option == "6":
-    #     quad()
+    elif option == "6":
+        print()
+        is_prime = num_property.is_prime()
+        if is_prime:
+            output("The number is prime")
+        else:
+            output("The number is not prime")
 
-    # elif option == "7":
-    #     vector_menu()
+    elif option == "7":
+        print()
+        msg = polynomial.get_quad_roots()
+        output(msg)
+    
+    elif option == "8":
+        print()
+        value = num_property.factorial()
+        output(value)
 
-    # elif option == "8":
-    #     check_if_prime()
-
-    # elif option == "9":
-    #     trig_menu()
+    elif option == "9":
+        trig_menu()
 
     # elif option == "10":
-    #     factorial()
-
+    #     vector_menu()
 
     elif option == "cls":
         os.system("clear")
 
     elif option == "quit":
-        print("Thank you")
+        print("\nThank you for using MyCalc")
         break
 
     else:
-        print("Invalid Input, try again\n")
+        print("Invalid option, try again\n")
+        sleep(1.5)
