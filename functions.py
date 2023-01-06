@@ -3,7 +3,7 @@ __doc__ = "Implementation of mathematical functions"
 
 from helper import get_float_input
 from helper import get_int_input
-from math import sin, cos, tan, asin, acos, radians, degrees, atan2
+from math import sin, cos, tan, asin, acos, radians, degrees, atan
 
 
 class Arithmetic:
@@ -133,5 +133,5 @@ class Trignometry:
     def find_tan_inverse(self):
         num = get_float_input()
         if self.mode == "degrees":
-            return round(degrees(atan2(num)), 4)
-        return round(atan2(num), 4)
+            return round(degrees(atan(num)), 4)
+        return round(atan(num), 4)
