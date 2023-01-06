@@ -1,50 +1,41 @@
 __doc__ = "Helper functions for calculator"
+from time import sleep
 
 
-def get_float_input():
+def get_float_input(msg="Enter a number: "):
     try:
-        num = input("Enter a number: ")
+        num = input(msg)
         num_ = float(num)
     except:
-        print("Invalid input, try again!")
-        num = input("Enter a number: ")
+        print(f"Invalid input, try again!")
+        sleep(1)
+        num = input(msg)
         num_ = float(num)
     return num_
+
+
+def get_int_input(msg="Enter a number: "):
+    try:
+        num = input(msg)
+        num_ = int(num)
+    except:
+        print(f"Invalid input, try again!")
+        sleep(1)
+        num = input(msg)
+        num_ = int(num)
+    return num_
+
+
+def vector_input():
+    print("Enter vector as (x,y)")
+    x = get_float_input(msg="x? : ")
+    y = get_float_input(msg="y? : ")
+    return x, y
 
 
 def output(data):
     print("{0:^50}".format("-"*50))
     print("{0:^50}".format(data))
     print("{0:^50}".format("-"*50))
-
-
-# def trig_input():
-#     try:
-#         num_ = input("Enter a number: ")
-#         num = float(num_)
-#     except:
-#         print("Invalid input, try again!")
-#         num_ = input("Enter a number: ")
-#         num = float(num_)
-
-#     return num
-
-# def vector_input():
-#     print("Enter vector as (x,y)")
-#     try:
-#         x1 = input("x? :")
-#         x = float(x1)
-#     except:
-#         print("Invalid input, try again!")
-#         x1 = input("x? :")
-#         x = float(x1)
-
-#     try:
-#         y1 = input("y? :")
-#         y = float(y1)
-#     except:
-#         print("Invalid input, try again!")
-#         y1 = input("y? :")
-#         y = float(y1)
-
-#     return x, y
+    print()
+    sleep(1.5)
