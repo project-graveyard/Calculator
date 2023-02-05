@@ -6,8 +6,8 @@ def get_float_input(msg="Enter a number: "):
     try:
         num = input(msg)
         num_ = float(num)
-    except:
-        print(f"Invalid input, try again!")
+    except ValueError:
+        print("Invalid input, try again!")
         sleep(1)
         num = input(msg)
         num_ = float(num)
@@ -18,8 +18,8 @@ def get_int_input(msg="Enter a number: "):
     try:
         num = input(msg)
         num_ = int(num)
-    except:
-        print(f"Invalid input, try again!")
+    except ValueError:
+        print("Invalid input, try again!")
         sleep(1)
         num = input(msg)
         num_ = int(num)
