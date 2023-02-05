@@ -9,6 +9,7 @@ from functions import Polynomial
 from functions import NumberProperties
 from helper import output
 from submenus import trig_menu
+from submenus import vector_menu
 import os
 from time import sleep
 
@@ -21,6 +22,7 @@ num_property = NumberProperties()
 print("="*50)
 print("{0:^50}".format("Welcome to MyCalc"))
 print("="*50)
+
 while True:
     print("{0:^50}".format("Main Menu"))
     print("-"*50)
@@ -34,12 +36,12 @@ while True:
     print("[!} Enter 'quit' to exit \n")
 
     option = input("Enter an option number: ")
-    
+
     if option == "1":
         print()
         print("[!] Input 0 when done\n")
         value = arithmetic.add()
-        output(f"The sum of the numbers are {value}")   
+        output(f"The sum of the numbers are {value}")
 
     elif option == "2":
         print()
@@ -77,7 +79,7 @@ while True:
         print()
         msg = polynomial.get_quad_roots()
         output(msg)
-    
+
     elif option == "8":
         print()
         value = num_property.factorial()
@@ -86,8 +88,8 @@ while True:
     elif option == "9":
         trig_menu()
 
-    # elif option == "10":
-    #     vector_menu()
+    elif option == "10":
+        vector_menu()
 
     elif option == "cls":
         os.system("clear")
@@ -98,4 +100,4 @@ while True:
 
     else:
         print("Invalid option, try again\n")
-        sleep(1.5)
+        sleep(1)
