@@ -99,37 +99,37 @@ class Trignometry:
 
     def __init__(self, mode="radians") -> None:
         self.mode = mode
-    
+
     def find_sin(self):
         num = get_float_input()
         if self.mode == "degrees":
             return round(sin(radians(num)), 4)
         return round(sin(num), 4)
-    
+
     def find_cos(self):
         num = get_float_input()
         if self.mode == "degrees":
             return round(cos(radians(num)), 4)
         return round(cos(num), 4)
-    
+
     def find_tan(self):
         num = get_float_input()
         if self.mode == "degrees":
             return round(tan(radians(num)), 4)
         return round(tan(num), 4)
-    
+
     def find_sin_inverse(self):
         num = get_float_input()
         if self.mode == "degrees":
             return round(degrees(asin(num)), 4)
         return round(asin(num), 4)
-    
+
     def find_cos_inverse(self):
         num = get_float_input()
         if self.mode == "degrees":
             return round(degrees(acos(num)), 4)
         return round(acos(num), 4)
-    
+
     def find_tan_inverse(self):
         num = get_float_input()
         if self.mode == "degrees":
