@@ -1,8 +1,12 @@
 __doc__ = "Calculator sub menu functions"
 
 from helper import output
+from helper import vector_input
+from helper import get_float_input
 from time import sleep
 from functions import Trignometry
+import vectors
+from math import degrees, atan2, acos
 
 
 deg_trig = Trignometry("degrees")
@@ -27,7 +31,7 @@ def trig_menu():
 
         print("\nIn degrees mode...\n")
         option_2 = input("Select an option: ")
-        
+
         if option_2 == "1":
             print()
             val = deg_trig.find_sin()
@@ -54,8 +58,8 @@ def trig_menu():
             output(f"The answer is {val} degrees")
         else:
             print("\nInvalid input, try again!\n")
-            sleep(1.5)
-    
+            sleep(1)
+
     elif option_1 == "2":
         print()
         print("{0:^30}".format("Trignometry Menu"))
@@ -93,99 +97,106 @@ def trig_menu():
             output(f"The answer is {val} radians")
         else:
             print("\nInvalid input, try again!\n")
-            sleep(1.5)
+            sleep(1)
 
     else:
         print("\nInvalid input, try again!\n")
-        sleep(1.5)
+        sleep(1)
 
 
 def vector_menu():
-    print('\n')
-    print("{0:^40}".format("="*40))
-    print("{0:^40}".format("Welcome to 2D-Vectors Calculator"))
-    print("{0:^40}".format("="*40))
- 
-    print("{0:<35}{1:<35}".format("1. Add", "2. Subtract"))
-    print("{0:<35}{1:<35}".format(
-        "3. Multiply by scale factor", "4. Dot product"))
-    print("{0:<35}{1:<35}".format(
+    print()
+    print("{0:^65}".format("2D-Vectors Calculator"))
+    print("-"*65)
+
+    print("{0:<35}{1:<30}".format("1. Add", "2. Subtract"))
+    print("{0:<35}{1:<30}".format(
+        "3. Scalar multiplication", "4. Dot product"))
+    print("{0:<35}{1:<30}".format(
         "5. Magnitude (1 vector)", "6. Magnitude (2 Vectors)"))
-    print("{0:<35}{1:<35}".format(
-        "7. Angle between vector & origin", "8. Angle between vectors"))
-    print("To goto main menu, press 'ENTER'\n")
-    num = str(input("Choose an option: "))
- 
-    if num == "1":
-        print("First vector")
-        vect1 = vector_input()
-        print("Second vector")
-        vect2 = vector_input()
- 
-        first = Add2D(vect1[0], vect1[1])
-        second = Add2D(vect2[0], vect2[1])
-        result = first + second
-        return decor(f'({result.x}, {result.y})', "The sum of the vectors is ")
- 
-    elif num == "2":
-        print("First vector")
-        vect1 = vector_input()
-        print("Second vector")
-        vect2 = vector_input()
- 
-        first = Sub2D(vect1[0], vect1[1])
-        second = Sub2D(vect2[0], vect2[1])
-        result = first - second
-        return decor(f'({result.x}, {result.y})', "The difference of the vectors is ")
- 
-    elif num == "3":
-        try:
-            num_ = input("Enter the factor: ")
-            factor = float(num_)
-        except:
-            print("Invalid input, try again!")
-            num_ = input("Enter the factor: ")
-            factor = float(num_)
- 
-        vect = vector_input()
-        result = factor * vect[0], factor * vect[1]
-        return decor(f'({result[0]}, {result[1]})', "The resultant is ")
- 
-    elif num == "4":
-        vect1 = vector_input()
-        vect2 = vector_input()
- 
-        first = vect1[0] * vect2[0]
-        second = vect1[1] * vect2[1]
-        result = first + second
-        return decor(result, "The dot product is ")
- 
-    elif num == "5":
-        vect = vector_input()
-        result = ((vect[0]**2) + (vect[1]**2))**0.5
-        return decor(dec4(result), "The magnitude is ")
- 
-    elif num == "6":
-        vect1 = vector_input()
-        vect2 = vector_input()
- 
-        x_ = (vect1[0] - vect2[0])**2
-        y_ = (vect1[1] - vect2[1])**2
-        result = (x_ + y_)**0.5
-        return decor(dec4(result), "The magnitude is ")
+    print("{0:<35}{1:<30}".format(
+        "7. Angle between vector & origin", "8. Angle between 2 vectors"))
+    print()
 
-    elif num == "7":
-        vect = vector_input()
-        result = degrees(atan2(vect[1], vect[0]))
-        return decor(dec4(result), "The angle is ")
+    option = input("Choose an option: ")
 
-    elif num == "8":
+    if option == "1":
+        print("\nFirst vector")
         vect1 = vector_input()
+        print("\nSecond vector")
         vect2 = vector_input()
-        mag1 = ((vect1[0]**2) + (vect1[1]**2))**0.5
-        mag2 = ((vect2[0]**2) + (vect2[1]**2))**0.5
-        dot_p = ((vect1[0] * vect2[0]) + (vect1[1] * vect2[1]))
+
+        first_vector = vectors.Make2D(vect1[0], vect1[1])
+        second_vector = vectors.Make2D(vect2[0], vect2[1])
+        result_vector = first_vector + second_vector
+
+        output(
+            f"The sum of the vectors is ({result_vector.x}, {result_vector.y})"
+        )
+
+    elif option == "2":
+        print("\nFirst vector")
+        vect1 = vector_input()
+        print("\nSecond vector")
+        vect2 = vector_input()
+
+        first_vector = vectors.Make2D(vect1[0], vect1[1])
+        second_vector = vectors.Make2D(vect2[0], vect2[1])
+        result_vector = first_vector - second_vector
+
+        output(
+            f"The difference vector is ({result_vector.x}, {result_vector.y})"
+        )
+
+    elif option == "3":
+        vect = vector_input()
+        factor = get_float_input("Scale factor: ")
+        result_vector = factor * vect[0], factor * vect[1]
+        output(f"The resultant is ({result_vector[0]}, {result_vector[1]})")
+
+    elif option == "4":
+        print("\nFirst vector")
+        vect1 = vector_input()
+        print("\nSecond vector")
+        vect2 = vector_input()
+
+        result = vectors.dot_product(vect1, vect2)
+        output(f"The dot product is {result}")
+
+    elif option == "5":
+        vect = vector_input()
+        result = vectors.magnitude(vect)
+        output(f"The magnitude is {result}")
+
+    elif option == "6":
+        print("\nFirst vector")
+        vect1 = vector_input()
+        print("\nSecond vector")
+        vect2 = vector_input()
+
+        x = (vect1[0] - vect2[0]) ** 2
+        y = (vect1[1] - vect2[1]) ** 2
+
+        result = (x + y) ** 0.5
+        output(f"The magnitude is {result}")
+
+    elif option == "7":
+        vect = vector_input()
+        angle = degrees(atan2(vect[1], vect[0]))
+        output(f"The angle is {angle} degrees")
+
+    elif option == "8":
+        print("\nFirst vector")
+        vect1 = vector_input()
+        print("\nSecond vector")
+        vect2 = vector_input()
+
+        mag1 = vectors.magnitude(vect1)
+        mag2 = vectors.magnitude(vect2)
+        dot_p = vectors.dot_product(vect1, vect2)
         result = degrees(acos(dot_p / (mag1 * mag2)))
-        return decor(dec4(result), "The angle is ")
+        output(f"The angle is {round(result, 4)}")
+
     else:
-        print("Invalid input, try again\n")
+        print("\nInvalid input, try again!\n")
+        sleep(1)
